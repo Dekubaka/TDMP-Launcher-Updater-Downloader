@@ -15,7 +15,7 @@ function InstallDotNet {
     Write-Host "Downloading $fileName" -ForegroundColor Cyan
 
     $ProgressPreference = 'SilentlyContinue'
-    Invoke-WebRequest -Method Get -Uri $dotNET_7_Desktop_URL -OutFile $fileName
+    Invoke-WebRequest -Method Get -Uri $dotNET_7_Desktop_URL -OutFile $fileName -UseBasicParsing
 
     $fileExist = Test-Path -Path .\$fileName
     
@@ -56,14 +56,14 @@ function TDMPLauncherSetup {
     Write-Host "Getting latest version from github" -ForegroundColor Cyan
 
     $latestReleaseURI = "https://github.com/TDMP-Team/TDMP-Launcher-Public/releases/latest"
-    $latestRelease = Invoke-WebRequest -Method Get -Uri $latestReleaseURI  -Headers @{"Accept"="application/json"}
+    $latestRelease = Invoke-WebRequest -Method Get -Uri $latestReleaseURI  -Headers @{"Accept"="application/json"} -UseBasicParsing
     $latestVersion = ($latestRelease.Content | ConvertFrom-Json)."tag_name"
     Write-Host "Latest version is $latestVersion" -ForegroundColor Cyan
 
     Write-Host "Downloading zip..." -ForegroundColor Yellow
     $downloadUri = "https://github.com/TDMP-Team/TDMP-Launcher-Public/releases/download/$latestVersion/TDMP-Launcher-$latestVersion.zip"
     $fileName = $(Split-Path -Path $downloadUri -Leaf)
-    Invoke-WebRequest -Method Get -Uri $downloadUri -OutFile $fileName 
+    Invoke-WebRequest -Method Get -Uri $downloadUri -OutFile $fileName -UseBasicParsing
     Write-Host "Zip-a-Dee-Doo-Dah downloaded" -ForegroundColor Green
 
     Write-Host "Unzippping" -ForegroundColor Yellow
