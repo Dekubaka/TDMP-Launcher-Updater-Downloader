@@ -3,11 +3,11 @@
 # Teardown multiplayer mod launcher: https://github.com/TDMP-Team/TDMP-Launcher-Updater-Public/releases/latest
 
 
-
 # Installing Microsoft Visual C++ 2015-2022 Redistributable (x64)
 function InstallVisualC {
     $vc_Redist_URL = 'https://aka.ms/vs/17/release/vc_redist.x64.exe'
 
+    Write-Host "Starting Microsoft Visual C++ 2015-2022 Redistributable Install" -ForegroundColor Cyan
     $fileName = $(Split-Path -Path $vc_Redist_URL -Leaf)
     Write-Host "Downloading $fileName" -ForegroundColor Cyan
 
